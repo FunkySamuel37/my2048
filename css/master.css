@@ -19,6 +19,9 @@
   padding-bottom: 25%;
   position: absolute;
 }
+.app-2048__blockitem.empty {
+  opacity: 0;
+}
 .app-2048__blockitem:before {
   content:attr(data-block-value);
   position: absolute;
