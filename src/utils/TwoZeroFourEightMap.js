@@ -9,6 +9,7 @@ class Point {
 export class TwoZeroFourEightMap {
   constructor() {
     this.cache = this.generateMap();
+    this.fillAZeroPoint();
   }
   generateMap() {
     const map = [];
@@ -21,5 +22,15 @@ export class TwoZeroFourEightMap {
   }
   getCatch() {
     return this.cache;
+  }
+  fillAZeroPoint() {
+    const zeroPointArr = this.findZeroPoint();
+    zeroPointArr[this.getRandom(zeroPointArr.length-1)].value = (this.getRandom(1)+1)*2;
+  }
+  findZeroPoint() {
+    return this.cache.filter(point => !point.value)
+  }
+  getRandom(length) {
+    return Math.round(Math.random() * length);
   }
 }
