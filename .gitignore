@@ -1,6 +1,7 @@
 
 # Created by https://www.gitignore.io/api/node
 
+bundle.js
 ### Node ###
 # Logs
 logs
@@ -49,4 +50,3 @@ jspm_packages
 
 # Yarn Integrity file
 .yarn-integrity
-
