@@ -1,0 +1,28 @@
+.app-2048 {
+  width: 320px;
+  margin: 0 auto;
+}
+.app-2048__blocklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-2048__blockitem {
+  display: block;
+  width: 25%;
+  height: 0;
+  padding-bottom: 25%;
+  position: absolute;
+}
+.app-2048__blockitem:before {
+  content:attr(data-block-value);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
