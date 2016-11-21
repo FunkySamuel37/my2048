@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReactDOM} from 'react-dom';
-
 import classNames from 'classNames';
+
 
 class MatrixItem extends React.Component {
   constructor(props, context) {

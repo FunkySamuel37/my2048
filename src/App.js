@@ -4,27 +4,43 @@ import {TwoZeroFourEightMap} from './utils/TwoZeroFourEightMap.js'
 
 import MatrixItem from './components/MatrixItem';
 
+import DirectionTypes from './constants/DirectionTypes.js';
 class App extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.tzfeMap = new TwoZeroFourEightMap();
+    //window.tzfeMap is for develpoment
+    window.tzfeMap = this.tzfeMap = new TwoZeroFourEightMap();
     this.state = { mapState: this.tzfeMap.getCatch() }
   }
   componentDidMount() {
     this.addKeyEvent();
   }
   addKeyEvent() {
+    const that = this;
     document.addEventListener('keydown', function(event) {
-        switch (event.keyCode) {
-          case 37:
-          case 38:
-          case 39:
-          case 40:
-            break;
-          default:
-            return;
-        }
-        console.log(event.keyCode)
+      let direction;
+      switch (event.keyCode) {
+        case 37:
+          direction = DirectionTypes.LEFT;
+          break;
+        case 38:
+          direction = DirectionTypes.UP;
+          break;
+        case 39:
+          direction = DirectionTypes.RIGHT;
+          break;
+        case 40:
+          direction = DirectionTypes.DOWN;
+          break;
+        default:
+          return;
+      }
+      that.tzfeMap.mergeItems(direction);
+      that.tzfeMap.fillAZeroPoint();
+      that.setState({
+        mapState: that.tzfeMap.getCatch()
+      })
+      console.log(direction)
     }, false);
   }
   render() {
