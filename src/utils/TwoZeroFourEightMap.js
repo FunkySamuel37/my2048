@@ -40,70 +40,67 @@ export class TwoZeroFourEightMap {
   getPoint(x, y) {
     return this.cache.find(p => p.x === x && p.y === y);
   }
-  removeZero(vertical, order) {
-    let hasZero = true;
-    const {column, row} = this;
+  getPointWithVector(x, y, vertical, order) {
     if (vertical) {
-      while (hasZero) {
-        for (let x = 0; x < row; x++) {
-
-          let y = order ? column - 1 : 0;
-          for (; order && y >= 0 || !order && y < column; order ? y-- : y++) {
-            hasZero = false;
-            let point = this.getPoint(x, y);
-            if (!point.value) {
-              let i =  order ? y - 1 : y + 1;
-
-              for (; order && i >= 0 || !order && i <= column - y - 1; order ? i-- : i++) {
-                let prePoint = this.getPoint(x, i);
-                // debugger
-                if (prePoint && prePoint.value) {
-                  prePoint.y = y;
-                  point.y = i;
-                  hasZero = true;
-                  break;
-                } else if (prePoint == undefined){
-                  console.log(`x: ${x}, y: ${i}`)
-                } else {
-                  continue;
-                }
-              }
-            }
-          }
-        }
+      if (order) {
+        return this.getPoint(y, 3-x)
+      } else {
+        return this.getPoint(y, x)
       }
     } else {
-      while (hasZero) {
-        for (let y = 0; y < column; y++) {
-
-          let x = order ? row - 1 : 0;
-          for (; order && x >= 0 || !order && x < row; order ? x-- : x++) {
-            hasZero = false;
-            let point = this.getPoint(x, y);
-            if (!point.value) {
-              let i =  order ? x - 1 : x + 1;
-              for (; order && i >= 0 || !order && i <= row - x - 1; order ? i-- : i++) {
-                let prePoint = this.getPoint(i, y);
-                // debugger
-                if (prePoint && prePoint.value) {
-                  prePoint.x = x;
-                  point.x = i;
-                  hasZero = true;
-                  break;
-                } else if (prePoint == undefined){
-                  console.log(`x: ${i}, y: ${y}`)
-                } else {
-                  continue;
-                }
-              }
-            }
-          }
-        }
+      if (order) {
+        return this.getPoint(3-x, y)
+      } else {
+        //向左
+        return this.getPoint(x, y);
       }
     }
+  }
 
+  move(vertical, order) {
 
-    console.log(this.getCatch());
+    let moved = false;
+    //向左
+    for (let row = 0; row < 4; row++) {
+      //处理合并
+      for (let col = 0; col < 4; col++) {
+        const point = this.getPointWithVector(col, row, vertical, order);
+        let i = col + 1;
+        let other = this.getPointWithVector(i, row, vertical, order);
+        while (other && point.value) {
+          i++;
+          if (other.value && point.value && other.value === point.value) {
+            point.value += other.value;
+            other.value = 0;
+            moved = true;
+            break;
+          } else if (other.value && point.value && other.value !== point.value) {
+            break;
+          }
+          other = this.getPointWithVector(i, row, vertical, order);
+        }
+
+      }
+      //去零操作
+      for (let i = 0; i < 4; i++) {
+        const point = this.getPointWithVector(i, row, vertical, order);
+        let j = i + 1;
+        let other = this.getPointWithVector(j, row, vertical, order);
+        if (point.value !== 0) continue;
+        while (other) {
+          if (other.value !== 0) {
+            point.value = other.value;
+            other.value = 0;
+            moved = true;
+            break;
+          }
+          j++;
+          other = this.getPointWithVector(j, row, vertical, order);
+        }
+      }
+
+    }
+    return moved;
   }
   mergeItems(direction) {
     let vertical = true;
@@ -125,7 +122,9 @@ export class TwoZeroFourEightMap {
       default:
         return;
     }
-    this.removeZero(vertical, order);
+    console.log('move')
+    return this.move(vertical, order);
+    // this.removeZero(vertical, order);
     //水平向右为右结合， 优先从右侧开始运算
     //水平向左为左结合， 优先从左侧开始运算
     //垂直向下为下结合， 优先从下侧开始运算

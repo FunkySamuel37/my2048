@@ -35,6 +35,7 @@ class App extends React.Component {
         default:
           return;
       }
+
       that.tzfeMap.mergeItems(direction);
       that.tzfeMap.fillAZeroPoint();
       that.setState({
