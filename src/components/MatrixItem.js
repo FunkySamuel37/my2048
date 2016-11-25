@@ -68,7 +68,7 @@ class MatrixItem extends React.Component {
     })
     return (
       <li
-        className={`${blockClass} x${x} y${y}`}
+        className={`${blockClass} x${x} y${y} size-${value}`}
         data-block-value={value}>
         <div>
         </div>

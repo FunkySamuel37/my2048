@@ -12,7 +12,6 @@ class Point {
 export class TwoZeroFourEightMap {
   constructor() {
     this.cache = this.generateMap();
-    this.fillAZeroPoint();
     this.row = 4;
     this.column = 4;
   }

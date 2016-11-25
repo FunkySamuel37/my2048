@@ -1,5 +1,6 @@
 .app-2048 {
   width: 320px;
+  height: 320px;
   margin: 0 auto;
 }
 .app-2048__blocklist {
@@ -7,29 +8,51 @@
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 320px;
+  height: 100%;
   overflow: hidden;
   position: relative;
 }
-
+.blocklist__wrap {
+  position: relative;
+  background-color: rgb(187, 173, 160);
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
 .app-2048__blockitem {
   display: block;
   width: 25%;
-  height: 0;
-  padding-bottom: 25%;
+  height: 25%;
+  /*padding-bottom: calc(25% - 10px);*/
+  padding: 5px;
+  box-sizing: border-box;
   position: absolute;
   transition: left .5s ease, top .5s ease;
+  z-index: 10;
 }
-.app-2048__blockitem.empty {
-  opacity: 0;
-}
+
 .app-2048__blockitem:before {
   content:attr(data-block-value);
   position: absolute;
   left: 50%;
   top: 50%;
+  font-size: 36px;
+  font-weight: bolder;
+  color: #fff;
   transform: translate3d(-50%, -50%, 0);
 }
+
+.app-2048__blockitem div {
+  height: 100%;
+  border-radius: 4px;
+  content:attr(data-block-value);
+}
+.app-2048__blockitem.empty {
+  opacity: 0;
+}
+
 
 .app-2048__blockitem.x0 {
   left: 0;
@@ -54,4 +77,64 @@
 }
 .app-2048__blockitem.y3 {
   top: 75%;
+}
+
+.app-2048__blocklist.grid-bg.grid-bg {
+  position: absolute;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.app-2048__blocklist.grid-bg .app-2048__blockitem.empty {
+  /*background-color: red;*/
+  opacity: 1;
+}
+
+.app-2048__blocklist.grid-bg .app-2048__blockitem:before {
+  content: '';
+}
+
+.app-2048__blocklist.grid-bg .app-2048__blockitem div {
+  background-color: rgba(238, 228, 218, 0.35);
+}
+.app-2048__blocklist.grid-bg .app-2048__blocklist div {
+  z-index: 1;
+}
+
+.app-2048__blockitem.size-2 div {
+  background: #eee4da;
+}
+.app-2048__blockitem.size-4 div {
+  background: #ede0c8;
+}
+.app-2048__blockitem.size-8 div {
+  background: #f2b179;
+}
+.app-2048__blockitem.size-16 div {
+  background: #f59563;
+}
+.app-2048__blockitem.size-32 div {
+  background: #f67c5f;
+}
+.app-2048__blockitem.size-64 div {
+  background: #f65e3b;
+}
+.app-2048__blockitem.size-128 div {
+  background: #edcf72;
+}
+.app-2048__blockitem.size-256 div {
+  background: #edcc61;
+}
+.app-2048__blockitem.size-512 div {
+  background: #edc850;
+}
+
+.app-2048__blockitem.size-1024 div {
+  background: #edc53f;
+}
+
+.app-2048__blockitem.size-2048 div {
+  background: #edc22e;
 }

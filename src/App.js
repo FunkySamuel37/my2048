@@ -10,7 +10,10 @@ class App extends React.Component {
     super(props, context);
     //window.tzfeMap is for develpoment
     window.tzfeMap = this.tzfeMap = new TwoZeroFourEightMap();
+    this.tzfeMap.fillAZeroPoint();
+
     this.state = { mapState: this.tzfeMap.getCatch() }
+    this.bgMap = new TwoZeroFourEightMap();
   }
   componentDidMount() {
     this.addKeyEvent();
@@ -55,17 +58,25 @@ class App extends React.Component {
   }
   render() {
     const {mapState} = this.state;
+    const bgGrid = this.bgMap.getCatch();
     return (
       <div className="app">
         <section className="app-header">
           <button>开始游戏</button>
         </section>
         <section className="app-2048">
-          <ul className="app-2048__blocklist">
-            {mapState.map((block) => (
-              <MatrixItem key={block.keyProp} {...block} />
-            ))}
-          </ul>
+          <div className="blocklist__wrap">
+            <ul className="app-2048__blocklist">
+              {mapState.map((block) => (
+                <MatrixItem key={block.keyProp} {...block} />
+              ))}
+            </ul>
+            <ul className="app-2048__blocklist grid-bg">
+              {bgGrid.map((block) => (
+                <MatrixItem key={block.keyProp} {...block} />
+              ))}
+            </ul>
+          </div>
         </section>
       </div>
     )
