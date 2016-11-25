@@ -18,6 +18,7 @@
   height: 0;
   padding-bottom: 25%;
   position: absolute;
+  transition: left 1s ease, top .3s ease;
 }
 .app-2048__blockitem.empty {
   opacity: 0;
@@ -28,4 +29,29 @@
   left: 50%;
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+
+.app-2048__blockitem.x0 {
+  left: 0;
+}
+.app-2048__blockitem.x1 {
+  left: 25%;
+}
+.app-2048__blockitem.x2 {
+  left: 50%;
+}
+.app-2048__blockitem.x3 {
+  left: 75%;
+}
+.app-2048__blockitem.y0 {
+  top: 0;
+}
+.app-2048__blockitem.y1 {
+  top: 25%;
+}
+.app-2048__blockitem.y2 {
+  top: 50%;
+}
+.app-2048__blockitem.y3 {
+  top: 75%;
 }

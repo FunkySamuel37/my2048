@@ -1,10 +1,11 @@
 import DirectionTypes from '../constants/DirectionTypes.js'
 
 class Point {
-  constructor({x,y}) {
+  constructor({x, y, key}) {
     this.x = x;
     this.y = y;
     this.value = 0;
+    this.keyProp = key;
   }
 }
 
@@ -17,9 +18,11 @@ export class TwoZeroFourEightMap {
   }
   generateMap() {
     const map = [];
+    let key = 0;
     for (let y = 0; y < 4; y++) {
       for (let x = 0; x < 4; x++) {
-        map.push(new Point({x,y}))
+        map.push(new Point({x, y, key}))
+        key++;
       }
     }
     return map;
@@ -29,7 +32,7 @@ export class TwoZeroFourEightMap {
   }
   fillAZeroPoint() {
     const zeroPointArr = this.findZeroPoint();
-    zeroPointArr[this.getRandom(zeroPointArr.length-1)].value = (this.getRandom(1)+1)*2;
+    zeroPointArr[this.getRandom(zeroPointArr.length-1)].value = this.getRandom(1) > 0.9 ? 2 : 4;
   }
   findZeroPoint() {
     return this.cache.filter(point => !point.value)

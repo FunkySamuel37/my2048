@@ -38,8 +38,10 @@ class App extends React.Component {
 
       that.tzfeMap.mergeItems(direction);
       that.tzfeMap.fillAZeroPoint();
+      const map = that.tzfeMap.getCatch();
+      console.log(map)
       that.setState({
-        mapState: that.tzfeMap.getCatch()
+        mapState: map
       })
       console.log(direction)
     }, false);
@@ -54,7 +56,7 @@ class App extends React.Component {
         <section className="app-2048">
           <ul className="app-2048__blocklist">
             {mapState.map((block) => (
-              <MatrixItem {...block} />
+              <MatrixItem key={block.keyProp} {...block} />
             ))}
           </ul>
         </section>

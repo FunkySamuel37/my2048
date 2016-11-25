@@ -8,19 +8,14 @@ class MatrixItem extends React.Component {
     super(props, context);
   }
   render () {
-    const {key, value, x, y} = this.props;
+    const {value, x, y, keyProp} = this.props;
     const blockClass = classNames("app-2048__blockitem", {
       empty: !value,
     })
     return (
       <li
-        className={blockClass}
-        key={key}
-        data-block-value={value}
-        style={{
-          left: `${x*25}%`,
-          top: `${y*25}%`
-        }}>
+        className={`${blockClass} x${x} y${y}`}
+        data-block-value={value}>
         <div>
         </div>
       </li>
