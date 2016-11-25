@@ -18,7 +18,7 @@
   height: 0;
   padding-bottom: 25%;
   position: absolute;
-  transition: left 1s ease, top .3s ease;
+  transition: left .5s ease, top .5s ease;
 }
 .app-2048__blockitem.empty {
   opacity: 0;

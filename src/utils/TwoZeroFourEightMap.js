@@ -59,7 +59,18 @@ export class TwoZeroFourEightMap {
       }
     }
   }
-
+  switchPointWithVector(point, other, vertical) {
+    if (vertical) {
+      let tempY = point.y;
+      point.y = other.y;
+      other.y = tempY;
+    } else {
+      //向左
+      let tempX = point.x;
+      point.x = other.x;
+      other.x = tempX;
+    }
+  }
   move(vertical, order) {
 
     let moved = false;
@@ -73,8 +84,9 @@ export class TwoZeroFourEightMap {
         while (other && point.value) {
           i++;
           if (other.value && point.value && other.value === point.value) {
-            point.value += other.value;
-            other.value = 0;
+            other.value += point.value;
+            point.value = 0;
+            this.switchPointWithVector(point, other, vertical);
             moved = true;
             break;
           } else if (other.value && point.value && other.value !== point.value) {
@@ -92,8 +104,9 @@ export class TwoZeroFourEightMap {
         if (point.value !== 0) continue;
         while (other) {
           if (other.value !== 0) {
-            point.value = other.value;
-            other.value = 0;
+            // point.value = other.value;
+            // other.value = 0;
+            this.switchPointWithVector(point, other, vertical);
             moved = true;
             break;
           }

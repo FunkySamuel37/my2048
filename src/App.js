@@ -37,12 +37,19 @@ class App extends React.Component {
       }
 
       that.tzfeMap.mergeItems(direction);
-      that.tzfeMap.fillAZeroPoint();
       const map = that.tzfeMap.getCatch();
       console.log(map)
       that.setState({
         mapState: map
       })
+      setTimeout(()=> {
+        that.tzfeMap.fillAZeroPoint()
+      }, 300);
+      setTimeout(()=> {
+        that.setState({
+          mapState: map
+        })
+      }, 300)
       console.log(direction)
     }, false);
   }
